@@ -1,0 +1,11 @@
+title,description,handle,match_any,type,operator,value
+"Dernière Chance","Dernière Chance","derniere-chance","false","VARIANT_PRICE","GREATER_THAN","20"
+"Vente Flash","Offre Flash","offre-flash","false","VARIANT_PRICE","GREATER_THAN","30"
+"Tous les Produits","tous les produits","tous-les-produits","false","VARIANT_PRICE","LESS_THAN","9999999"
+"Tout à moins de 20€","Tout à moins de 20€","tout-a-moins-de-20","false","VARIANT_PRICE","LESS_THAN","21"
+"Accessoires Moto ⚙️","Accessoires de Moto ⚙️","accessoires-de-moto","false","vendor","equals","Accessoires de Moto"
+"Mode et Style","Mode et Style","mode-et-style","false","vendor","equals","Mode et Style"
+"Vêtements & Protections","Vêtements & Protections","vetements-protections","false","vendor","equals","Vêtements & Protections"
+"Bagagerie & Transport","Bagagerie & Transport","bagagerie-transport","false","vendor","equals","Bagagerie & Transport"
+"Équipement Moto","Équipement Moto","equipement-moto","false","vendor","equals","Équipement Moto"
+"Entretien et Décoration","Entretien et Décoration","entretien-decoration","false","vendor","equals","Entretien et Décoration" 
