@@ -79,14 +79,13 @@ export function Header({
 
   return (
     <>
-    
-    <div className="w-full bg-[var(--color-1)] overflow-hidden whitespace-nowrap text-xs sticky top-0 z-2">
-    <div className="relative flex md:gap-16 lg:gap-0 gap-10">
+      <div className="w-full bg-[var(--color-1)] overflow-hidden whitespace-nowrap text-xs sticky top-0 z-2">
+      <div className="relative flex md:gap-16 lg:gap-0 gap-10">
           {/* Marquee Content (duplicated for seamless loop) */}
           <div className="marquee-content flex gap-14 md:gap-20 lg:min-w-full max-w-max justify-between md:justify-around">
             <p className="px-2 md:px-4 !py-2 font-normal text-black tracking-widest !text-xs">
-              contact@espritautomoto.com
-            </p>
+              {import.meta.env.VITE_CUSTOMER_SUPPORT_EMAIL}
+             </p>
             <p className="px-2 md:px-4 !py-2 font-normal text-black tracking-widest !text-xs">
               Service client Français 🇫🇷
             </p>
@@ -99,8 +98,8 @@ export function Header({
             aria-hidden="true"
           >
             <p className="px-2 md:px-4 !py-2 font-normal text-black tracking-widest !text-xs">
-              contact@espritautomoto.com
-            </p>
+              {import.meta.env.VITE_CUSTOMER_SUPPORT_EMAIL}
+             </p>
             <p className="px-2 md:px-4 !py-2 font-normal text-black tracking-widest !text-xs">
               Service client Français 🇫🇷
             </p>
@@ -159,6 +158,7 @@ export function Header({
               />
             </NavLink>
           </div>
+
           {/* Center: Desktop Menu */}
           <div className="!hidden md:flex items-center ml-8 flex-1 mt-2 lg:!block">
             <HeaderMenu
@@ -176,22 +176,32 @@ export function Header({
       </header>
       <CollectionsAside />
       <InformationsAside />
+
     </>
   );
 }
-
+// function transformMenuToHTML(menu: any, collections: any, currentTheme: string) {
+//   const excludedHandles = ["derniere-chance", "tout-a-moins-de-20", "offre-flash"];
+//   const collectionsData =
+//     collections?.edges
+//       ?.filter((edge: any) => {
+//         const values = edge.node.metafield?.value
+//           ?.split(",")
+//           .map((v: string) => v.trim());
+ 
+//         return values?.includes(currentTheme);
+//       })
+//       ?.filter((edge: any) => !excludedHandles.includes(edge.node.handle)) // exclude unwanted
+//       ?.map((edge: any) => ({
+//         id: edge.node.handle,
+//         href: `/collections/${edge.node.handle}`,
+//         title: edge.node.title,
+//       })) || [];
 // Transform menu object to the desired structure
-function transformMenuToHTML(menu: any, collections: any, currentTheme: string) {
+function transformMenuToHTML(menu: any, collections: any) {
   const excludedHandles = ["derniere-chance", "tout-a-moins-de-20", "offre-flash"];
   const collectionsData =
     collections?.edges
-      ?.filter((edge: any) => {
-        const values = edge.node.metafield?.value
-          ?.split(",")
-          .map((v: string) => v.trim());
- 
-        return values?.includes(currentTheme);
-      })
       ?.filter((edge: any) => !excludedHandles.includes(edge.node.handle)) // exclude unwanted
       ?.map((edge: any) => ({
         id: edge.node.handle,
@@ -389,7 +399,7 @@ export function HeaderMenu({
     const transformedMenu = transformMenuToHTML(
       menu || FALLBACK_HEADER_MENU,
       collections,
-      import.meta.env.VITE_STORE_NAME
+      // import.meta.env.VITE_STORE_NAME
 
     );
 
@@ -455,7 +465,7 @@ export function HeaderMenu({
                       </summary>
                       <ul
                         id={`HeaderMenu-MenuList-${item.id}`}
-                      className="header__submenu color-scheme-1 gradient gradient first-header__submenu list-menu list-menu--disclosure gradient caption-large motion-reduce global-settings-popup !overflow-y-auto !max-h-[410px]"
+                        className="header__submenu color-scheme-1 gradient gradient first-header__submenu list-menu list-menu--disclosure gradient caption-large motion-reduce global-settings-popup !overflow-y-auto !max-h-[410px]"
                         tabIndex={-1}
                       >
                         {item.submenu?.map(
@@ -494,7 +504,7 @@ export function HeaderMenu({
   const transformedMenu = transformMenuToHTML(
     menu || FALLBACK_HEADER_MENU,
     collections,
-    import.meta.env.VITE_STORE_NAME
+    // import.meta.env.VITE_STORE_NAME
   );
 
   return (
@@ -762,17 +772,26 @@ function CollectionsAside() {
   const [collections, setCollections] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
-  const currentTheme = import.meta.env.VITE_STORE_NAME;
+  // const currentTheme = import.meta.env.VITE_STORE_NAME;
+  // const excludedHandles = ["derniere-chance", "tout-a-moins-de-20", "offre-flash"];
+  // const collectionsData =
+  //   collections?.edges
+  //     ?.filter((edge: any) => {
+  //       const values = edge.node.metafield?.value
+  //         ?.split(",")
+  //         .map((v: string) => v.trim());
+ 
+  //       return values?.includes(currentTheme);
+  //     })
+  //     ?.filter((edge: any) => !excludedHandles.includes(edge.node.handle)) // exclude unwanted
+  //     ?.map((edge: any) => ({
+  //       id: edge.node.handle,
+  //       href: `/collections/${edge.node.handle}`,
+  //       title: edge.node.title,
+  //     })) || [];
   const excludedHandles = ["derniere-chance", "tout-a-moins-de-20", "offre-flash"];
   const collectionsData =
     collections?.edges
-      ?.filter((edge: any) => {
-        const values = edge.node.metafield?.value
-          ?.split(",")
-          .map((v: string) => v.trim());
- 
-        return values?.includes(currentTheme);
-      })
       ?.filter((edge: any) => !excludedHandles.includes(edge.node.handle)) // exclude unwanted
       ?.map((edge: any) => ({
         id: edge.node.handle,
